@@ -1,0 +1,22 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "MERN shopping card app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natnaelh14/ecommerce.git"
+  },
+  "author": "Natnael Haile",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/natnaelh14/ecommerce/issues"
+  },
+  "homepage": "https://github.com/natnaelh14/ecommerce#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
