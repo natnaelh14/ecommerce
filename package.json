@@ -4,8 +4,9 @@
   "description": "MERN shopping card app",
   "main": "server.js",
   "scripts": {
-    "start": "node backend/server && node fron",
-    "develop": "concurrently \"cd backend && npm start\" \"cd frontend && npm start\""
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "develop": "concurrently \"npm run server\" \"cd frontend && npm start\""
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,10 @@
   },
   "homepage": "https://github.com/natnaelh14/ecommerce#readme",
   "dependencies": {
-    "concurrently": "^6.2.1",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.1",
+    "nodemon": "^2.0.12"
   }
 }
