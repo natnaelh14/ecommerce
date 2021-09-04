@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {
   Row,
@@ -10,11 +11,19 @@ import {
   ListGroupItem,
 } from 'react-bootstrap';
 import Rating from '../components/Rating';
-import products from '../products';
 
+//A match object contains information about how a <Route path> matched the URL. match objects contain properties like: params, isExact, path, url
 const ProductScreen = ({ match }) => {
-  //A match object contains information about how a <Route path> matched the URL. match objects contain properties like: params, isExact, path, url
-  const product = products.find((p) => p._id === match.params.id);
+  const [product, setProduct] = useState({});
+
+  //Whatever we put in here runs, as soon as the component loads.
+  useEffect(() => {
+    const fetchProduct = async () =>{
+      const { data } = await axios.get(`/api/products/${match.params.id}`)
+      setProduct(data)
+    }
+    fetchProduct()
+  }, [])
 
   return (
     <>
