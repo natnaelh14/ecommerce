@@ -12,7 +12,7 @@ const reviewSchema = mongoose.Schema({
 const productSchema = mongoose.Schema({
     //This adds a relationship between a product and a user.
     user: {
-        type: mongoose.Schema.Types.ObjectID,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
     },
