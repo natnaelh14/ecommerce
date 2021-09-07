@@ -7,20 +7,24 @@
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
-    "develop": "concurrently \"npm run server\" \"cd frontend && npm start\""
+    "client": "npm start --prefix frontend",
+    "develop": "concurrently \"npm run server\" \"cd frontend && npm start\"",
+    "data:import": "node backend/seeder",
+    "data:destroy": "node backend/seeder -d"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/natnaelh14/ecommerce.git"
   },
   "author": "Natnael Haile",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/natnaelh14/ecommerce/issues"
   },
   "homepage": "https://github.com/natnaelh14/ecommerce#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.4"
