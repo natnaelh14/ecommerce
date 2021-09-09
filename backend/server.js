@@ -1,16 +1,17 @@
 import express  from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
-import connectDB from './config/connection.js';
+import db from './config/connection.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import productRoutes from './routes/productRoutes.js';
 
 dotenv.config();
 
-connectDB();
-
 //initialize express with a variable called 'app'
 const app = express();
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('API is running...');
@@ -22,11 +23,10 @@ app.use(notFound)
 
 app.use(errorHandler)
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 3001;
 
-app.listen(
-  PORT,
-  console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
-  )
-)
+db.once('open', () => {
+  app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`.yellow.bold);
+  });
+});

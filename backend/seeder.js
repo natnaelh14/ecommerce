@@ -6,14 +6,12 @@ import products from './data/products.js';
 import User from './models/userModel.js';
 import Product from './models/productModel.js';
 import Order from './models/orderModel.js';
-import connectDB from './config/connection.js';
+import db from './config/connection.js';
 
 //We are doing this because we are not connected to the server from here.
 dotenv.config();
 
-connectDB();
-
-const importData = async () => {
+db.once('open', async () => {
   try {
     await Order.deleteMany();
     await Product.deleteMany();
@@ -34,25 +32,4 @@ const importData = async () => {
     //exiting with a failure.
     process.exit(1);
   }
-};
-
-const destroyData = async () => {
-  try {
-    await Order.deleteMany();
-    await Product.deleteMany();
-    await User.deleteMany();
-
-    console.log('Data Destroyed!'.red.inverse)
-    process.exit();
-  } catch (e) {
-    console.error(`${e}`.red.inverse);
-    //exiting with a failure.
-    process.exit(1);
-  }
-};
-
-if (process.argv[2] === '-d') {
-  destroyData()
-} else {
-  importData()
-}
+})
