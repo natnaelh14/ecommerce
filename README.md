@@ -4,7 +4,7 @@
 ## Live Link
 
 ## Description
-Jboard is a web application that empowers job seekers with tools to keep track of job applications.
+Ecommerce
 ## Table of Contents
 * [Installation](#Installation)
 * [Usage](#Usage)
