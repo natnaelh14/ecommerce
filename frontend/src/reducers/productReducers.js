@@ -2,6 +2,9 @@ import {
   PRODUCT_LIST_SUCCESS,
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_FAIL,
+  PRODUCT_DETAIL_REQUEST,
+  PRODUCT_DETAIL_SUCCESS,
+  PRODUCT_DETAIL_FAIL,
 } from '../constants/productConstants';
 
 //State for product list, which we will see in the homepage
@@ -15,6 +18,23 @@ export const productListReducer = (state = { products: [] }, action) => {
       return { loading: false, products: action.payload };
     //If it fails, we will send error through the state.
     case PRODUCT_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    //we are returning the initial state
+    default:
+      return state;
+  }
+};
+
+export const productDetailsReducer = (state = { product: { reviews: [] } }, action) => {
+  switch (action.type) {
+    //When we make the fetch request
+    case PRODUCT_DETAIL_REQUEST:
+      return { loading: true, ...state };
+    //If we get a successful response with the data.
+    case PRODUCT_DETAIL_SUCCESS:
+      return { loading: false, product: action.payload };
+    //If it fails, we will send error through the state.
+    case PRODUCT_DETAIL_FAIL:
       return { loading: false, error: action.payload };
     //we are returning the initial state
     default:
