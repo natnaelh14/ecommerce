@@ -17,7 +17,7 @@ import Loader from '../components/Loader';
 import { listProductDetails } from '../actions/productActions';
 
 //A match object contains information about how a <Route path> matched the URL. match objects contain properties like: params, isExact, path, url
-const ProductScreen = ({ match }) => {
+const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(0);
 
   const dispatch = useDispatch();
@@ -29,6 +29,10 @@ const ProductScreen = ({ match }) => {
   useEffect(() => {
     dispatch(listProductDetails(match.params.id));
   }, [dispatch, match]);
+
+  const addToCartHandler = () => {
+    history.push(`/cart/${match.params.id}?qty=${qty}`)
+  }
 
   return (
     <>
@@ -101,6 +105,7 @@ const ProductScreen = ({ match }) => {
                 )}
                 <ListGroupItem>
                   <Button
+                    onClick={addToCartHandler}
                     className='btn-block'
                     type='button'
                     disabled={product.countInStock === 0}
