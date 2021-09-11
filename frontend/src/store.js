@@ -11,8 +11,12 @@ const reducer = combineReducers({
   cart: cartReducer,
 });
 
+const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
+
 //if we want something to be loaded, when redux store initially loads, we put it in here.
-const initialState = {};
+const initialState = {
+  cart: { cartItems: cartItemsFromStorage }
+};
 
 const middleware = [thunk];
 
