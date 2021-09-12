@@ -22,17 +22,33 @@ const CartScreen = ({ match, location, history }) => {
 
   const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.cart)
+  const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-  console.log('CART', cartItems);
 
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId, qty))
+      dispatch(addToCart(productId, qty));
     }
-  }, [dispatch, productId, qty])
+  }, [dispatch, productId, qty]);
 
-  return <div>Cart</div>;
+  return (
+    <Row>
+      <Col md={8}>
+        <h1>Shopping Cart</h1>
+        {cartItems.length === 0 ? <Message>Your Cart is Empty<Link to='/'>Go Back</Link></Message> : (
+          <ListGroup variant='flush'>
+
+          </ListGroup>
+        )}
+      </Col>
+      <Col md={2}>
+
+      </Col>
+      <Col md={2}>
+
+      </Col>
+    </Row>
+  );
 };
 
 export default CartScreen;
