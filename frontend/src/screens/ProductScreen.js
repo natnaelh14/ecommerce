@@ -18,7 +18,7 @@ import { listProductDetails } from '../actions/productActions';
 
 //A match object contains information about how a <Route path> matched the URL. match objects contain properties like: params, isExact, path, url
 const ProductScreen = ({ history, match }) => {
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
 
   const dispatch = useDispatch();
 
