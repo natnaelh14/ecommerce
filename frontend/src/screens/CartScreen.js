@@ -35,6 +35,11 @@ const CartScreen = ({ match, location, history }) => {
     console.log('remove');
   };
 
+  const checkoutHandler = () => {
+    //Not logged in, it will go to log in. if logged in, it will go to shipping.
+    history.push('/login?redirect=shipping')
+  }
+
   return (
     <Row>
       <Col md={8}>
@@ -90,9 +95,17 @@ const CartScreen = ({ match, location, history }) => {
       </Col>
       <Col md={4}>
         <Card>
-          <ListGroup variant='flush' >
+          <ListGroup variant='flush'>
             <ListGroup.Item>
-                <h2></h2>
+              <h2>
+                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
+                items
+              </h2>
+              ${ cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2) }
+              {/* toFixed is to add decimal points. */}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <Button type='button' className='btn-block' disabled = {cartItems.length === 0} onClick={checkoutHandler}>Proceed to checkout</Button>
             </ListGroup.Item>
           </ListGroup>
         </Card>
