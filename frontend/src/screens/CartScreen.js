@@ -12,7 +12,7 @@ import {
   Card,
 } from 'react-bootstrap';
 import Message from '../components/Message';
-import { addToCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const CartScreen = ({ match, location, history }) => {
   //retrieve product id.
@@ -32,12 +32,12 @@ const CartScreen = ({ match, location, history }) => {
   }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {
-    console.log('remove');
+    dispatch(removeFromCart(id));
   };
 
   const checkoutHandler = () => {
     //Not logged in, it will go to log in. if logged in, it will go to shipping.
-    history.push('/login?redirect=shipping')
+    history.push('/login?redirect=shipping');
   }
 
   return (
