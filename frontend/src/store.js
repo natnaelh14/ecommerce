@@ -1,10 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { productListReducer, productDetailsReducer } from './reducers/productReducers';
+import {
+  productListReducer,
+  productDetailsReducer,
+} from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { userLoginReducer } from './reducers/userReducers';
-
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -13,11 +15,18 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
 });
 
-const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
+const cartItemsFromStorage = localStorage.getItem('cartItems')
+  ? JSON.parse(localStorage.getItem('cartItems'))
+  : [];
+
+const userInfoFromStorage = localStorage.getItem('userInfo')
+  ? JSON.parse(localStorage.getItem('userInfo'))
+  : null;
 
 //if we want something to be loaded, when redux store initially loads, we put it in here.
 const initialState = {
-  cart: { cartItems: cartItemsFromStorage }
+  cart: { cartItems: cartItemsFromStorage },
+  userLogin: { userInfo: userInfoFromStorage },
 };
 
 const middleware = [thunk];
