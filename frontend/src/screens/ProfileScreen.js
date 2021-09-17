@@ -3,7 +3,8 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { getUserDetails } from '../actions/userActions';
+import { getUserDetails, updateUserProfile } from '../actions/userActions';
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -20,11 +21,15 @@ const ProfileScreen = ({ location, history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
+
   useEffect(() => {
     if (!userInfo) {
       history.push('/login');
     } else {
-      if (!user.name) {
+      if (!user || !user.name || success) {
+        dispatch({ type: USER_UPDATE_PROFILE_RESET });
         //it is going to hit the route /api/users/profile
         dispatch(getUserDetails('profile'));
       } else {
@@ -32,7 +37,7 @@ const ProfileScreen = ({ location, history }) => {
         setEmail(user.email);
       }
     }
-  }, [dispatch, history, userInfo, user]);
+  }, [dispatch, history, userInfo, user, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -40,6 +45,7 @@ const ProfileScreen = ({ location, history }) => {
       setMessage("Passwords don't match");
     } else {
       //DISPATCH UPDATE PROFILE
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
     }
   };
 
@@ -49,6 +55,7 @@ const ProfileScreen = ({ location, history }) => {
         <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
+        {success && <Message variant='success'>Profile Updated</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           {/* Name */}
