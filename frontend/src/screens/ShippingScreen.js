@@ -7,10 +7,9 @@ import FormContainer from '../components/FormContainer';
 import { saveShippingAddress } from '../actions/cartActions';
 
 const ShippingScreen = ({ history }) => {
-
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
-//fill in pre-existing data from local storage
+  //fill in pre-existing data from local storage
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
@@ -20,9 +19,9 @@ const ShippingScreen = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-   dispatch(saveShippingAddress({ address, city, postalCode, country }));
-   history.push('/payment');
-}
+    dispatch(saveShippingAddress({ address, city, postalCode, country }));
+    history.push('/payment');
+  };
 
   return (
     <FormContainer>
