@@ -5,6 +5,11 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 
+const submitHandler = (e) => {
+    e.preventDefault();
+    console.log('submit')
+}
+
 const ShippingScreen = ({ history }) => {
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
