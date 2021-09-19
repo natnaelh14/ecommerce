@@ -1,11 +1,15 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/cartConstants';
+import {
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  CART_SAVE_SHIPPING_ADDRESS,
+} from '../constants/cartConstants';
 
 //'state' is the initial state
-export const cartReducer = (state = { cartItems: [] }, action) => {
+export const cartReducer = (state = { cartItems: [], shippingAddress: {} }, action) => {
   switch (action.type) {
     case CART_ADD_ITEM:
       const item = action.payload;
-      const existItem = state.cartItems.find(x => x.product === item.product);
+      const existItem = state.cartItems.find((x) => x.product === item.product);
       //if a cart item exists
       if (existItem) {
         return {
@@ -18,14 +22,19 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         return {
           //If cart doesn't exist, we will add current item to the array.
           ...state,
-          cartItems: [ ...state.cartItems, item ],
+          cartItems: [...state.cartItems, item],
         };
       }
     case CART_REMOVE_ITEM:
       return {
         ...state,
-        cartItems: state.cartItems.filter(x => x.product !== action.payload)
-      }
+        cartItems: state.cartItems.filter((x) => x.product !== action.payload),
+      };
+    case CART_SAVE_SHIPPING_ADDRESS:
+      return {
+        ...state,
+        shippingAddress: action.payload, //action.payload -  data we passed in from form.
+      };
     default:
       return state;
   }
