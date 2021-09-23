@@ -7,7 +7,6 @@ import {
   updateUserProfile,
 } from '../controllers/userControllers.js';
 import { protect } from '../middleware/authMiddleware.js';
-
 router.route('/').post(registerUser);
 router.post('/login', authUser);
 // To implement middleware, we put 'protect' as the first argument.
@@ -17,3 +16,7 @@ router
   .put(protect, updateUserProfile);
 
 export default router;
+
+
+
+
