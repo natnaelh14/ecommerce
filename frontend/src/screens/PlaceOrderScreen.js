@@ -37,17 +37,17 @@ const PlaceOrderScreen = ({ history }) => {
     Number(cart.taxPrice)
   ).toFixed(2);
 
-  // const orderCreate = useSelector((state) => state.orderCreate)
-  // const { order, success, error } = orderCreate
+  const orderCreate = useSelector((state) => state.orderCreate)
+  const { order, success, error } = orderCreate
 
-  // useEffect(() => {
-  //   if (success) {
-  //     history.push(`/order/${order._id}`);
-  //     dispatch({ type: USER_DETAILS_RESET });
-  //     dispatch({ type: ORDER_CREATE_RESET });
-  //   }
-  //   // eslint-disable-next-line
-  // }, [history, success]);
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`);
+      // dispatch({ type: USER_DETAILS_RESET });
+      // dispatch({ type: ORDER_CREATE_RESET });
+    }
+    // eslint-disable-next-line
+  }, [history, success]);
 
   const placeOrderHandler = () => {
     dispatch(
@@ -148,7 +148,7 @@ const PlaceOrderScreen = ({ history }) => {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                {/* {error && <Message variant='danger'>{error}</Message>} */}
+                {error && <Message variant='danger'>{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button
