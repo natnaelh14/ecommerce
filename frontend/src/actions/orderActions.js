@@ -3,6 +3,9 @@ import {
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
   ORDER_CREATE_FAIL,
+  ORDER_DETAILS_SUCCESS,
+  ORDER_DETAILS_FAIL,
+  ORDER_DETAILS_REQUEST,
 } from '../constants/orderConstants';
 import { logout } from './userActions'
 
@@ -38,6 +41,42 @@ export const createOrder = (order) => async (dispatch, getState) => {
       }
       dispatch({
         type: ORDER_CREATE_FAIL,
+        payload: message,
+      })
+    }
+  }
+
+  export const getOrderDetails = (id) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ORDER_DETAILS_REQUEST,
+      })
+      //Destructuring to access the token.
+      const {
+        userLogin: { userInfo },
+      } = getState()
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+      const { data } = await axios.get(`/api/orders/${id}`, config)
+      dispatch({
+        type: ORDER_DETAILS_SUCCESS,
+        //if it is successful, we will pass the data down to the order state.
+        payload: data,
+      })
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      if (message === 'Not authorized, token failed') {
+        dispatch(logout())
+      }
+      dispatch({
+        type: ORDER_DETAILS_FAIL,
         payload: message,
       })
     }
