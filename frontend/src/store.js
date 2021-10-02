@@ -13,7 +13,12 @@ import {
   userUpdateProfileReducer,
 } from './reducers/userReducers';
 
-import { orderCreateReducer, orderDetailsReducer, orderPayReducer } from './reducers/orderReducer';
+import {
+  orderCreateReducer,
+  orderDetailsReducer,
+  orderPayReducer,
+  orderListMyReducer,
+} from './reducers/orderReducer';
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -26,6 +31,7 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
+  orderListMy: orderListMyReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
@@ -42,7 +48,7 @@ const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
 
 //if we want something to be loaded, when redux store initially loads, we put it in here.
 const initialState = {
-  cart: { 
+  cart: {
     cartItems: cartItemsFromStorage,
     shippingAddress: shippingAddressFromStorage,
   },
