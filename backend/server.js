@@ -10,6 +10,8 @@ import orderRoutes from './routes/orderRoutes.js';
 
 dotenv.config();
 
+db();
+
 //initialize express with a variable called 'app'
 const app = express();
 
