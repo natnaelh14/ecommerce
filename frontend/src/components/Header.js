@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Nav, Navbar, Container, NavDropdown } from 'react-bootstrap';
 import { logout } from '../actions/userActions';
+import LogoImage from '../img/logo.png';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -18,9 +19,10 @@ const Header = () => {
     <header>
       <Navbar style={{backgroundColor: '#25252c'}} variant='dark' expand='lg' collapseOnSelect>
         <Container>
-          <LinkContainer to='/'>
-            <Navbar.Brand>ProShop</Navbar.Brand>
+          <LinkContainer to='/' style={{ 'width': '75px', 'height': '75px', 'margin': '0 10px' }} >
+            <img className="navbar-logo" src={LogoImage} alt="logo" />            
           </LinkContainer>
+          <Navbar.Brand>SpiceLand</Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
