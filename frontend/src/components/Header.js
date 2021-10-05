@@ -22,7 +22,7 @@ const Header = () => {
           <LinkContainer to='/' style={{ 'width': '75px', 'height': '75px', 'margin': '0 10px' }} >
             <img className="navbar-logo" src={LogoImage} alt="logo" />            
           </LinkContainer>
-          <Navbar.Brand>SpiceLand</Navbar.Brand>
+          <Navbar.Brand>SpiceLand & Co.</Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
