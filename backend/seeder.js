@@ -6,12 +6,14 @@ import products from './data/products.js';
 import User from './models/userModel.js';
 import Product from './models/productModel.js';
 import Order from './models/orderModel.js';
-import db from './config/connection.js';
+import connectDB from './config/db.js';
 
 //We are doing this because we are not connected to the server from here.
 dotenv.config();
 
-db.once('open', async () => {
+connectDB()
+
+const importData = async () => {
   try {
     await Order.deleteMany();
     await Product.deleteMany();
@@ -32,4 +34,6 @@ db.once('open', async () => {
     //exiting with a failure.
     process.exit(1);
   }
-})
+}
+
+importData();
