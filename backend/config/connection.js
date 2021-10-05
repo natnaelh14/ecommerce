@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/3001',
+  process.env.MONGODB_URI || 'mongodb://localhost/spiceland',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
