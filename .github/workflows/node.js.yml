@@ -3,21 +3,21 @@
 
 name: Node.js CI
 
+# When Should you be checking for the code
 on:
-  push:
-    branches: [ main ]
-  pull_request:
+  push: # When someone pushes a code
+    branches: [ main ] # Main is reserved for production ready code.
+  pull_request: # When someone makes a pull request
     branches: [ main ]
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    # GitHub is going to setup an ubuntu server to run out test with.
+    runs-on: ubuntu-latest # Most enterprise software is running linux, more specifically ubuntu.
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [12.x, 14.x, 16.x] # We are checking for the versions of node.js
 
     steps:
     - uses: actions/checkout@v2
