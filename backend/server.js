@@ -12,13 +12,13 @@ dotenv.config();
 
 connectDB();
 
+
 //initialize express with a variable called 'app'
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 //it allows us to accept JSON in the body
 app.use(express.json());
-
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/frontend/build')))

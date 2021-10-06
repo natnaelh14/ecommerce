@@ -55,9 +55,9 @@ const OrderScreen = ({ match }) => {
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
-        addPayPalScript();
+        addPayPalScript()
       } else {
-        setSdkReady(true);
+        setSdkReady(true)
       }
     }
   }, [dispatch, order, orderId, successPay]);

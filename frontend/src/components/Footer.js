@@ -10,7 +10,7 @@ const Footer = () => {
           <Col className='text-center py-3'>Copyright &copy; SpiceLand & Co.</Col>
         </Row>
         <Row>
-          <Col className='text-center' md="2" >
+          <Col >
             {' '}
             <a
               href='https://www.linkedin.com/in/natnael-haile-b146b41bb/'
@@ -20,7 +20,7 @@ const Footer = () => {
               <GrLinkedinOption />
             </a>
           </Col>
-          <Col className='text-center' md="2">
+          <Col >
             {' '}
             <a
               href='https://github.com/natnaelh14'
@@ -30,7 +30,7 @@ const Footer = () => {
               <GrGithub />
             </a>
           </Col>
-          <Col className='text-center' md="2">
+          <Col >
             {' '}
             <a
               href='mailto:haile.natnael@natnaeldev.com'
