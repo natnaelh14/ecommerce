@@ -10,12 +10,12 @@ const connectDB = async () => {
         // useCreateIndex: true,
       },
     );
-
+/* eslint-disable */
     console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline);
   } catch (error) {
     console.error(`Error: ${error.message}`.red.underline.bold);
     process.exit(1);
   }
 };
-
+/* eslint-disable */
 export default connectDB;
