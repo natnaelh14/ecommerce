@@ -50,19 +50,32 @@
     "rules": {
       "no-unused-vars": "off",
       "react/prop-types": "off",
-      "max-len": ["error",{"code": 200}],
-      "react/jsx-filename-extension": [1,{"extensions": [".js",".jsx"]}],
+      "max-len": [
+        "error",
+        {
+          "code": 200
+        }
+      ],
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
       "no-nested-ternary": "off",
       "no-case-declarations": "off",
-      "no-underscore-dangle": "off",      
+      "no-underscore-dangle": "off",
       "no-console": "off",
       "func-names": "off",
-      "import/prefer-default-export": "off"    
+      "import/prefer-default-export": "off"
     },
     "settings": {
-			"react": {
-				"version": "999.999.999"
-			}
-		}
+      "react": {
+        "version": "999.999.999"
+      }
+    }
   }
 }
