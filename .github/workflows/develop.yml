@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Develop Workflow
 
 # When Should you be checking for the code
 on:
