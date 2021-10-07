@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x] # We are checking for the versions of node.js
+        node-version: [14.x] # We are checking for the versions of node.js
 
     steps:
     - uses: actions/checkout@v2
