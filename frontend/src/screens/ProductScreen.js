@@ -16,7 +16,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { listProductDetails } from '../actions/productActions';
 
-//A match object contains information about how a <Route path> matched the URL. match objects contain properties like: params, isExact, path, url
+// A match object contains information about how a <Route path> matched the URL. match objects contain properties like: params, isExact, path, url
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1);
 
@@ -25,31 +25,31 @@ const ProductScreen = ({ history, match }) => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
-  //Whatever we put in here runs, as soon as the component loads.
+  // Whatever we put in here runs, as soon as the component loads.
   useEffect(() => {
     dispatch(listProductDetails(match.params.id));
   }, [dispatch, match]);
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`)
-    }
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
 
   return (
     <>
-      <Link to='/' className='btn btn-light my-3'>
+      <Link to="/" className="btn btn-light my-3">
         Go Back
       </Link>
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant='danger'>{error}</Message>
+        <Message variant="danger">{error}</Message>
       ) : (
         <Row>
           <Col md={6}>
             <Image src={product.image} alt={product.name} fluid />
           </Col>
           <Col md={3}>
-            <ListGroup variant='flush'>
+            <ListGroup variant="flush">
               <ListGroupItem>
                 <h3>{product.name}</h3>
               </ListGroupItem>
@@ -59,18 +59,27 @@ const ProductScreen = ({ history, match }) => {
                   text={`${product.numReviews} reviews`}
                 />
               </ListGroupItem>
-              <ListGroupItem>Price: {product.price}</ListGroupItem>
-              <ListGroupItem>Description: {product.description}</ListGroupItem>
+              <ListGroupItem>
+                Price:
+                {product.price}
+              </ListGroupItem>
+              <ListGroupItem>
+                Description:
+                {product.description}
+              </ListGroupItem>
             </ListGroup>
           </Col>
           <Col md={3}>
             <Card>
-              <ListGroup variant='flush'>
+              <ListGroup variant="flush">
                 <ListGroupItem>
                   <Row>
                     <Col>Price: </Col>
                     <Col>
-                      <strong>${product.price}</strong>
+                      <strong>
+                        $
+                        {product.price}
+                      </strong>
                     </Col>
                   </Row>
                 </ListGroupItem>
@@ -89,7 +98,7 @@ const ProductScreen = ({ history, match }) => {
                       <Col>Qty</Col>
                       <Col>
                         <Form.Control
-                          as='select'
+                          as="select"
                           value={qty}
                           onChange={(e) => setQty(e.target.value)}
                         >
@@ -106,8 +115,8 @@ const ProductScreen = ({ history, match }) => {
                 <ListGroupItem>
                   <Button
                     onClick={addToCartHandler}
-                    className='btn-block'
-                    type='button'
+                    className="btn-block"
+                    type="button"
                     disabled={product.countInStock === 0}
                   >
                     Add to Cart

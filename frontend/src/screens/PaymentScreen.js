@@ -1,4 +1,4 @@
-//This is where we choose the payment.
+// This is where we choose the payment.
 import React, { useState } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,30 +31,30 @@ const PaymentScreen = ({ history }) => {
       <h1>Payment Method</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group>
-          <Form.Label as='legend'>Select Method</Form.Label>
+          <Form.Label as="legend">Select Method</Form.Label>
           <Col>
             {/* PayPal Payment */}
             <Form.Check
-              type='radio'
-              label='PayPal or Credit Card'
-              id='PayPal'
-              name='paymentMethod'
-              value='PayPal'
+              type="radio"
+              label="PayPal or Credit Card"
+              id="PayPal"
+              name="paymentMethod"
+              value="PayPal"
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
-            ></Form.Check>
+            />
             {/* Stripe Payment */}
             <Form.Check
-            type='radio'
-            label='Stripe'
-            id='Stripe'
-            name='paymentMethod'
-            value='Stripe'
-            onChange={(e) => setPaymentMethod(e.target.value)}
-          ></Form.Check>
+              type="radio"
+              label="Stripe"
+              id="Stripe"
+              name="paymentMethod"
+              value="Stripe"
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            />
           </Col>
         </Form.Group>
-        <Button type='submit' variant='primary'>
+        <Button type="submit" variant="primary">
           Continue
         </Button>
       </Form>

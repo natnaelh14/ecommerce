@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
-//This is individual reviews
+// This is individual reviews
 const reviewSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -14,12 +14,12 @@ const reviewSchema = mongoose.Schema(
   },
   {
     timestamps: true,
-  }
-)
+  },
+);
 
 const productSchema = mongoose.Schema(
   {
-    //This adds a relationship between a product and a user.
+    // This adds a relationship between a product and a user.
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
@@ -69,9 +69,9 @@ const productSchema = mongoose.Schema(
   },
   {
     timestamps: true,
-  }
-)
+  },
+);
 
-const Product = mongoose.model('Product', productSchema)
+const Product = mongoose.model('Product', productSchema);
 
-export default Product
+export default Product;

@@ -14,29 +14,26 @@ import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 
-
-const App = () => {
-  return (
-    <Router>
-      <Header />
-      <main className='py-3'>
-        <Container>
-          <Route exact path='/login' component={LoginScreen} />
-          <Route exact path='/placeorder' component={PlaceOrderScreen} />
-          <Route exact path='/order/:id' component={OrderScreen} />
-          <Route exact path='/shipping' component={ShippingScreen} />
-          <Route exact path='/payment' component={PaymentScreen} />
-          <Route exact path='/register' component={RegisterScreen} />
-          <Route exact path='/profile' component={ProfileScreen} />
-          <Route exact path='/' component={HomeScreen} />
-          <Route path='/product/:id' component={ProductScreen} />
-          {/* '?' means id is optional */}
-          <Route path='/cart/:id?' component={CartScreen} />
-        </Container>
-      </main>
-      <Footer />
-    </Router>
-  );
-};
+const App = () => (
+  <Router>
+    <Header />
+    <main className="py-3">
+      <Container>
+        <Route exact path="/login" component={LoginScreen} />
+        <Route exact path="/placeorder" component={PlaceOrderScreen} />
+        <Route exact path="/order/:id" component={OrderScreen} />
+        <Route exact path="/shipping" component={ShippingScreen} />
+        <Route exact path="/payment" component={PaymentScreen} />
+        <Route exact path="/register" component={RegisterScreen} />
+        <Route exact path="/profile" component={ProfileScreen} />
+        <Route exact path="/" component={HomeScreen} />
+        <Route path="/product/:id" component={ProductScreen} />
+        {/* '?' means id is optional */}
+        <Route path="/cart/:id?" component={CartScreen} />
+      </Container>
+    </main>
+    <Footer />
+  </Router>
+);
 
 export default App;

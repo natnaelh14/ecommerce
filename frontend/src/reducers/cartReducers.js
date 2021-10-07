@@ -5,27 +5,28 @@ import {
   CART_SAVE_SHIPPING_ADDRESS,
 } from '../constants/cartConstants';
 
-//'state' is the initial state
-export const cartReducer = (state = { cartItems: [], shippingAddress: {} }, action) => {
+// 'state' is the initial state
+export const cartReducer = (
+  state = { cartItems: [], shippingAddress: {} },
+  action,
+) => {
   switch (action.type) {
     case CART_ADD_ITEM:
       const item = action.payload;
       const existItem = state.cartItems.find((x) => x.product === item.product);
-      //if a cart item exists
+      // if a cart item exists
       if (existItem) {
         return {
           ...state,
-          cartItems: state.cartItems.map((x) =>
-            x.product === existItem.product ? item : x
-          ),
-        };
-      } else {
-        return {
-          //If cart doesn't exist, we will add current item to the array.
-          ...state,
-          cartItems: [...state.cartItems, item],
+          cartItems: state.cartItems.map((x) => (x.product === existItem.product ? item : x)),
         };
       }
+      return {
+        // If cart doesn't exist, we will add current item to the array.
+        ...state,
+        cartItems: [...state.cartItems, item],
+      };
+
     case CART_REMOVE_ITEM:
       return {
         ...state,
@@ -34,13 +35,13 @@ export const cartReducer = (state = { cartItems: [], shippingAddress: {} }, acti
     case CART_SAVE_SHIPPING_ADDRESS:
       return {
         ...state,
-        shippingAddress: action.payload, //action.payload -  data we passed in from form.
+        shippingAddress: action.payload, // action.payload -  data we passed in from form.
       };
-      case CART_SAVE_PAYMENT_METHOD:
-        return {
-          ...state,
-          paymentMethod: action.payload, 
-        };
+    case CART_SAVE_PAYMENT_METHOD:
+      return {
+        ...state,
+        paymentMethod: action.payload,
+      };
     default:
       return state;
   }

@@ -1,4 +1,5 @@
 import asyncHandler from 'express-async-handler';
+/* eslint-disable */
 import Order from '../models/orderModel.js';
 
 // @desc - Create new order
@@ -17,22 +18,21 @@ const addOrderItems = asyncHandler(async (req, res) => {
   if (orderItems && orderItems.length === 0) {
     res.status(400);
     throw new Error('No order items');
-    return;
-  } else {
-    const order = new Order({
-      orderItems,
-      user: req.user._id,
-      shippingAddress,
-      paymentMethod,
-      itemsPrice,
-      taxPrice,
-      shippingPrice,
-      totalPrice,
-    });
-    //Instantiate - since it is not saved in the database.
-    const createdOrder = await order.save();
-    res.status(201).json(createdOrder);
   }
+  const order = new Order({
+    orderItems,
+    /* eslint-disable */
+    user: req.user._id,
+    shippingAddress,
+    paymentMethod,
+    itemsPrice,
+    taxPrice,
+    shippingPrice,
+    totalPrice,
+  });
+    // Instantiate - since it is not saved in the database.
+  const createdOrder = await order.save();
+  res.status(201).json(createdOrder);
 });
 
 // @desc - Get Order by ID
@@ -41,7 +41,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
 const getOrderById = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id).populate(
     'user',
-    'name email'
+    'name email',
   );
   if (order) {
     res.json(order);
@@ -57,15 +57,15 @@ const getOrderById = asyncHandler(async (req, res) => {
 const updateOrderToPaid = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
   if (order) {
-    order.isPaid =true;
+    order.isPaid = true;
     order.paidAt = Date.now();
-    //This will come from PayPal
+    // This will come from PayPal
     order.paymentResult = {
       id: req.body.id,
       status: req.body.status,
       update_time: req.body.update_time,
       email_address: req.body.email_address,
-    }
+    };
     const updatedOrder = order.save();
     res.json(updatedOrder);
   } else {
@@ -78,8 +78,11 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
 // @route   GET /api/orders/myorders
 // @access  Private
 const getMyOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({ user: req.user._id })
-  res.json(orders)
-})
+  /* eslint-disable */
+  const orders = await Order.find({ user: req.user._id });
+  res.json(orders);
+});
 
-export { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders };
+export {
+  addOrderItems, getOrderById, updateOrderToPaid, getMyOrders,
+};

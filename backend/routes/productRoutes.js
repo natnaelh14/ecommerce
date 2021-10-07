@@ -1,10 +1,16 @@
 import express from 'express';
+/* eslint-disable */
+import {
+  getProductById,
+  getProducts,
+} from '../controllers/productController.js';
+/* eslint-disable */
+
 const router = express.Router();
-import { getProductById, getProducts } from '../controllers/productController.js';
 
-//.get is basically a get request
-router.route('/').get(getProducts)
+// .get is basically a get request
+router.route('/').get(getProducts);
 
-router.route('/:id').get(getProductById)
+router.route('/:id').get(getProductById);
 
 export default router;

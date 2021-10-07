@@ -1,5 +1,7 @@
 import asyncHandler from 'express-async-handler';
+/* eslint-disable */
 import Product from '../models/productModel.js';
+/* eslint-disable */
 
 // @desc - Fetch all products
 // @route - GET /api/products
@@ -17,7 +19,7 @@ const getProductById = asyncHandler(async (req, res) => {
   if (product) {
     res.json(product);
   } else {
-    //if you don't specify status, it will default to 500.
+    // if you don't specify status, it will default to 500.
     res.status(404);
     throw new Error('Product not found.');
   }
