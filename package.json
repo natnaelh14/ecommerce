@@ -58,6 +58,11 @@
       "no-console": "off",
       "func-names": "off",
       "import/prefer-default-export": "off"    
-    }
+    },
+    "settings": {
+			"react": {
+				"version": "999.999.999"
+			}
+		}
   }
 }
