@@ -1,3 +1,4 @@
+/* eslint-disable */
 import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
@@ -29,7 +30,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @access - Public
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
-  //check if the user already exists.
+  // check if the user already exists.
   const userExists = await User.findOne({ email });
 
   if (userExists) {
@@ -98,5 +99,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     throw new Error('User Not Found');
   }
 });
+/* eslint-disable */
 
-export { authUser, registerUser, getUserProfile, updateUserProfile };
+export {
+  authUser, registerUser, getUserProfile, updateUserProfile,
+};

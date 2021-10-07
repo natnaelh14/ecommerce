@@ -8,7 +8,7 @@ import { saveShippingAddress } from '../actions/cartActions';
 const ShippingScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
-  //fill in pre-existing data from local storage
+  // fill in pre-existing data from local storage
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
@@ -18,7 +18,9 @@ const ShippingScreen = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(saveShippingAddress({ address, city, postalCode, country }));
+    dispatch(saveShippingAddress({
+      address, city, postalCode, country,
+    }));
     history.push('/payment');
   };
 
@@ -28,50 +30,50 @@ const ShippingScreen = ({ history }) => {
       <h1>Shipping</h1>
       <Form onSubmit={submitHandler}>
         {/* Address */}
-        <Form.Group controlId='address'>
+        <Form.Group controlId="address">
           <Form.Label>Address</Form.Label>
           <Form.Control
-            type='text'
-            placeholder='Enter Address'
+            type="text"
+            placeholder="Enter Address"
             required
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-          ></Form.Control>
+          />
         </Form.Group>
         {/* City */}
-        <Form.Group controlId='city'>
+        <Form.Group controlId="city">
           <Form.Label>City</Form.Label>
           <Form.Control
-            type='text'
-            placeholder='Enter City'
+            type="text"
+            placeholder="Enter City"
             required
             value={city}
             onChange={(e) => setCity(e.target.value)}
-          ></Form.Control>
+          />
         </Form.Group>
         {/* Postal Code */}
-        <Form.Group controlId='postalCode'>
+        <Form.Group controlId="postalCode">
           <Form.Label>Postal Code</Form.Label>
           <Form.Control
-            type='text'
-            placeholder='Enter Postal Code'
+            type="text"
+            placeholder="Enter Postal Code"
             required
             value={postalCode}
             onChange={(e) => setPostalCode(e.target.value)}
-          ></Form.Control>
+          />
         </Form.Group>
         {/* Country */}
-        <Form.Group controlId='country'>
+        <Form.Group controlId="country">
           <Form.Label>Country</Form.Label>
           <Form.Control
-            type='text'
-            placeholder='Enter Country'
+            type="text"
+            placeholder="Enter Country"
             required
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-          ></Form.Control>
+          />
         </Form.Group>
-        <Button type='submit' variant='primary'>
+        <Button type="submit" variant="primary">
           Continue
         </Button>
       </Form>

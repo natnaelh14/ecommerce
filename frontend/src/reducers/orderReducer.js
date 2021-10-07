@@ -39,7 +39,7 @@ export const orderCreateReducer = (state = {}, action) => {
 
 export const orderDetailsReducer = (
   state = { loading: true, orderItems: [], shippingAddress: {} },
-  action
+  action,
 ) => {
   switch (action.type) {
     case ORDER_DETAILS_REQUEST:
@@ -79,7 +79,7 @@ export const orderPayReducer = (state = {}, action) => {
         error: action.payload,
       };
     case ORDER_PAY_RESET:
-      return {}
+      return {};
     default:
       return state;
   }
@@ -102,7 +102,7 @@ export const orderListMyReducer = (state = { orders: [] }, action) => {
         error: action.payload,
       };
     case ORDER_LIST_MY_RESET:
-      return { orders: [] } //We are emptying the state.
+      return { orders: [] }; // We are emptying the state.
     default:
       return state;
   }

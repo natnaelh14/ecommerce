@@ -15,7 +15,7 @@ import {
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_SUCCESS,
 } from '../constants/userConstants';
-import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
+import { ORDER_LIST_MY_RESET } from '../constants/orderConstants';
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -30,7 +30,7 @@ export const login = (email, password) => async (dispatch) => {
     const { data } = await axios.post(
       '/api/users/login',
       { email, password },
-      config
+      config,
     );
     dispatch({
       type: USER_LOGIN_SUCCESS,
@@ -51,8 +51,8 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo');
   dispatch({ type: USER_LOGOUT });
-  dispatch({ type: USER_DETAILS_RESET })
-  dispatch({ type: ORDER_LIST_MY_RESET })
+  dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: ORDER_LIST_MY_RESET });
 };
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -68,13 +68,13 @@ export const register = (name, email, password) => async (dispatch) => {
     const { data } = await axios.post(
       '/api/users',
       { name, email, password },
-      config
+      config,
     );
     dispatch({
       type: USER_REGISTER_SUCCESS,
       payload: data,
     });
-    //Log user in after registration
+    // Log user in after registration
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data,
@@ -90,25 +90,24 @@ export const register = (name, email, password) => async (dispatch) => {
     });
   }
 };
-//we get our userInfo from getState, which has the token.
+// we get our userInfo from getState, which has the token.
 export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_DETAILS_REQUEST,
     });
-    //destructuring to retrieve access the token
-    const { userLogin: { userInfo }} = getState();
+    // destructuring to retrieve access the token
+    const {
+      userLogin: { userInfo },
+    } = getState();
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`
+        Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(
-      `/api/users/${id}`,
-      config
-    );
+    const { data } = await axios.get(`/api/users/${id}`, config);
     dispatch({
       type: USER_DETAILS_SUCCESS,
       payload: data,
@@ -128,34 +127,33 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_UPDATE_PROFILE_REQUEST,
-    })
-    //Destructuring to access the token.
+    });
+    // Destructuring to access the token.
     const {
       userLogin: { userInfo },
-    } = getState()
+    } = getState();
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${userInfo.token}`,
       },
-    }
-    const { data } = await axios.put(`/api/users/profile`, user, config)
+    };
+    const { data } = await axios.put('/api/users/profile', user, config);
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
-    })
+    });
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+    const message = error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message;
     if (message === 'Not authorized, token failed') {
-      dispatch(logout())
+      dispatch(logout());
     }
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
       payload: message,
-    })
+    });
   }
-}
+};

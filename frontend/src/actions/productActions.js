@@ -8,7 +8,7 @@ import {
   PRODUCT_DETAILS_FAIL,
 } from '../constants/productConstants';
 
-//These are action creators, 'PRODUCT_LIST_REQUEST' are action being dispatched back to reducer.
+// These are action creators, 'PRODUCT_LIST_REQUEST' are action being dispatched back to reducer.
 export const listProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });

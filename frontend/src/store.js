@@ -46,7 +46,7 @@ const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
   ? JSON.parse(localStorage.getItem('shippingAddress'))
   : {};
 
-//if we want something to be loaded, when redux store initially loads, we put it in here.
+//  if we want something to be loaded, when redux store initially loads, we put it in here.
 const initialState = {
   cart: {
     cartItems: cartItemsFromStorage,
@@ -60,7 +60,7 @@ const middleware = [thunk];
 const store = createStore(
   reducer,
   initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
+  composeWithDevTools(applyMiddleware(...middleware)),
 );
 
 export default store;

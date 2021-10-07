@@ -12,7 +12,7 @@ const HomeScreen = () => {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
-  //Whatever we put in here runs, as soon as the component loads.
+  // Whatever we put in here runs, as soon as the component loads.
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);
@@ -23,7 +23,7 @@ const HomeScreen = () => {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant='danger'>{error}</Message>
+        <Message variant="danger">{error}</Message>
       ) : (
         <Row>
           {products.map((product) => (

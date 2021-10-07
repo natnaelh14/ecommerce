@@ -3,9 +3,9 @@ name: Develop Workflow
 # When Should you be checking for the code
 on:
   push: # When someone pushes a code
-    branches: [ develop ] # Main is reserved for production ready code.
+    branches: [develop] # Main is reserved for production ready code.
   pull_request: # When someone makes a pull request
-    branches: [ develop ]
+    branches: [develop]
 
 jobs:
   build:
@@ -17,13 +17,13 @@ jobs:
         node-version: [14.x] # We are checking for the versions of node.js
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run:  "This is the develop branch."
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: "This is the develop branch."
     # - run: npm ci
     # - run: npm run build --if-present
     # - run: npm test
