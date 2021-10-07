@@ -1,6 +1,5 @@
 name: Feature Workflow
 
-# When Should you be checking for the code
 on: [push]
 
 jobs:
