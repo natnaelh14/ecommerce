@@ -116,6 +116,7 @@ const getUsers = asyncHandler(async (req, res) => {
 // @access - Private/Admin
 
 const deleteUser = asyncHandler(async (req, res) => {
+  res.json({message: req.params.id})
   const user = await User.findById(req.params.id);
   // If the user exists
   if(user) {
