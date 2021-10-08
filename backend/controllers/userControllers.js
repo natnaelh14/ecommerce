@@ -101,6 +101,18 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 });
 /* eslint-disable */
 
+// @desc - Get all users
+// @route - GET /api/users
+// @access - Private/Admin
+
+const getUsers = asyncHandler(async (req, res) => {
+  // You pass in an empty object, because you want to get all the users.
+  const users = await User.find({});
+  res.json(users);
+});
+
+
+
 export {
-  authUser, registerUser, getUserProfile, updateUserProfile,
+  authUser, registerUser, getUserProfile, updateUserProfile, getUsers
 };
