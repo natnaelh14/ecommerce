@@ -25,5 +25,16 @@ const protect = asyncHandler(async (req, res, next) => {
   }
 });
 
-export { protect };
+// This middleware is only allow admin user access to things.
+const admin = (req, res, next) => {
+  if(req.user && req.user.isAdmin) {
+    next()
+  } else {
+    res.status(401)
+    throw new Error('Not authorized as an Admin')
+  }
+}
+
+
+export { protect, admin };
 /* eslint-disable */
