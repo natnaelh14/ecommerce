@@ -6,7 +6,9 @@ import {
   getUserProfile,
   updateUserProfile,
   getUsers,
-  deleteUser
+  deleteUser,
+  getUserById,
+  updateUser
 } from '../controllers/userControllers.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 /* eslint-disable */
@@ -22,5 +24,7 @@ router
 router
   .route('/:id')
   .delete(protect, admin, deleteUser)
+  .get(protect, admin, getUserById)
+  .put(protect, admin, updateUser)
 
 export default router;
