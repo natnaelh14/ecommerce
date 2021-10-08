@@ -6,14 +6,23 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { listUsers } from '../actions/userActions';
 
-const UserListScreen = () => {
+const UserListScreen = ({ history }) => {
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   useEffect(() => {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listUsers());
+    } else {
+      // If the user isn't logged in or If the user is not an admin.
+      history.push('/login');
+    }
     dispatch(listUsers());
-  }, [dispatch]);
+  }, [dispatch, history]);
 
   /* eslint-disable */
   const deleteHandler = (id) => {
