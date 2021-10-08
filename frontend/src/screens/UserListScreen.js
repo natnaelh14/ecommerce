@@ -15,6 +15,13 @@ const UserListScreen = () => {
     dispatch(listUsers());
   }, [dispatch]);
 
+  const deleteHandler = (id) => {
+    if (window.confirm('Are you sure')) {
+    //   dispatch(deleteUser(id))
+      console.log('delete')
+    }
+  }
+
   return (
     <>
       <h1>Users</h1>
