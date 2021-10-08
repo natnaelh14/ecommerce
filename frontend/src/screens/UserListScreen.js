@@ -22,7 +22,7 @@ const UserListScreen = ({ history }) => {
       history.push('/login');
     }
     dispatch(listUsers());
-  }, [dispatch, history]);
+  }, [dispatch, history, userInfo]);
 
   /* eslint-disable */
   const deleteHandler = (id) => {
