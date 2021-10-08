@@ -37,7 +37,7 @@ export const login = (email, password) => async (dispatch) => {
     const { data } = await axios.post(
       '/api/users/login',
       { email, password },
-      config
+      config,
     );
     dispatch({
       type: USER_LOGIN_SUCCESS,
@@ -76,7 +76,7 @@ export const register = (name, email, password) => async (dispatch) => {
     const { data } = await axios.post(
       '/api/users',
       { name, email, password },
-      config
+      config,
     );
     dispatch({
       type: USER_REGISTER_SUCCESS,
@@ -153,10 +153,9 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       payload: data,
     });
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
+    const message = error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message;
     if (message === 'Not authorized, token failed') {
       dispatch(logout());
     }
@@ -189,10 +188,9 @@ export const listUsers = (user) => async (dispatch, getState) => {
       payload: data,
     });
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
+    const message = error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message;
     if (message === 'Not authorized, token failed') {
       dispatch(logout());
     }
@@ -222,10 +220,9 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     // For success:true, we don't have to bring the payload in the dispatch
     dispatch({ type: USER_DELETE_SUCCESS });
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
+    const message = error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message;
     if (message === 'Not authorized, token failed') {
       dispatch(logout());
     }
