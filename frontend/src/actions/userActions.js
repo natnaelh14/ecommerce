@@ -248,16 +248,15 @@ export const updateUser = (user) => async (dispatch, getState) => {
 
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-   const { data } = await axios.put(`/api/users/${user._id}`, user, config);
+    const { data } = await axios.put(`/api/users/${user._id}`, user, config);
 
-   dispatch({ type: USER_UPDATE_SUCCESS });
-   // We want the update to trickle down the state.
-   dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
-
+    dispatch({ type: USER_UPDATE_SUCCESS });
+    // We want the update to trickle down the state.
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     const message = error.response && error.response.data.message
       ? error.response.data.message
