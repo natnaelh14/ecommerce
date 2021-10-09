@@ -5,7 +5,7 @@ import {
   Nav, Navbar, Container, NavDropdown,
 } from 'react-bootstrap';
 import { logout } from '../actions/userActions';
-import LogoImage from '../img/logo.png';
+import LogoImage from './img/logo.png';
 
 const Header = () => {
   const dispatch = useDispatch();
