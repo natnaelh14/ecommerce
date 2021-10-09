@@ -10,6 +10,7 @@ import {
   PRODUCT_DELETE_SUCCESS,
   PRODUCT_DELETE_REQUEST,
 } from '../constants/productConstants';
+import { logout } from './userActions';
 
 // These are action creators, 'PRODUCT_LIST_REQUEST' are action being dispatched back to reducer.
 export const listProducts = () => async (dispatch) => {
