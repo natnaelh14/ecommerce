@@ -80,7 +80,7 @@ export const productCreateReducer = (
     case PRODUCT_CREATE_FAIL:
       return { loading: false, error: action.payload };
     case PRODUCT_CREATE_RESET:
-      return {}
+      return {};
     default:
       return state;
   }
