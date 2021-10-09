@@ -26,7 +26,7 @@ const UserListScreen = ({ history }) => {
       history.push('/login');
     }
     dispatch(listUsers());
-  }, [dispatch, history, successDelete]);
+  }, [dispatch, history, successDelete, userInfo]);
 
   /* eslint-disable */
   const deleteHandler = (id) => {
