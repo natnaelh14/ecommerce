@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -8,6 +9,8 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
+
 /* eslint-disable */
 dotenv.config();
 
@@ -19,7 +22,9 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 // it allows us to accept JSON in the body
 app.use(express.json());
-
+// '__dirname' points to current directory. But It is only available with commonJS not ES modules.
+// This is the work around.
+const __dirname = path.resolve()
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/frontend/build')));
@@ -30,9 +35,14 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+// Setting the endpoint
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/upload', uploadRoutes);
+
+// We are making the the 'upload' folder static and accessible
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 // PayPal client id is stored in a the .env file.
 app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID));
