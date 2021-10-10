@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { LinkContainer } from "react-router-bootstrap";
-import { Table, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
-import { listOrders } from "../actions/orderActions";
+import React, { useEffect } from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Table, Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
+import { listOrders } from '../actions/orderActions';
 
 const OrderListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -19,10 +19,11 @@ const OrderListScreen = ({ history }) => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listOrders());
     } else {
-      history.push("/login");
+      history.push('/login');
     }
   }, [dispatch, history, userInfo]);
 
+  /* eslint-disable */
   return (
     <>
       <h1>Orders</h1>
@@ -40,7 +41,7 @@ const OrderListScreen = ({ history }) => {
               <th>TOTAL</th>
               <th>PAID</th>
               <th>DELIVERED</th>
-              <th></th>
+              <th />
             </tr>
           </thead>
           <tbody>
@@ -49,19 +50,22 @@ const OrderListScreen = ({ history }) => {
                 <td>{order._id}</td>
                 <td>{order.user && order.user.name}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
-                <td>${order.totalPrice}</td>
+                <td>
+                  $
+                  {order.totalPrice}
+                </td>
                 <td>
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
+                    <i className="fas fa-times" style={{ color: 'red' }} />
                   )}
                 </td>
                 <td>
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
+                    <i className="fas fa-times" style={{ color: 'red' }} />
                   )}
                 </td>
                 <td>
@@ -78,6 +82,7 @@ const OrderListScreen = ({ history }) => {
       )}
     </>
   );
+  /* eslint-disable */
 };
 
 export default OrderListScreen;
