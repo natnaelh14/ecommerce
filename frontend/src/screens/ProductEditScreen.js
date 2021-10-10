@@ -55,7 +55,7 @@ const ProductEditScreen = ({ match, history }) => {
   /* eslint-disable */
 
   const uploadFileHandler = async (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]; // It comes as an array
     const formData = new FormData();
     formData.append("image", file);
     setUploading(true);
