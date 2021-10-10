@@ -3,15 +3,22 @@ import axios from 'axios';
 import { PayPalButton } from 'react-paypal-button-v2';
 import { Link } from 'react-router-dom';
 import {
-  Row, Col, ListGroup, Image, Card,
+  Row, Col, ListGroup, Image, Card, Button,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { getOrderDetails, payOrder } from '../actions/orderActions';
-import { ORDER_PAY_RESET } from '../constants/orderConstants';
-/* eslint-disable */
-const OrderScreen = ({ match }) => {
+import {
+  getOrderDetails,
+  payOrder,
+  deliverOrder,
+} from '../actions/orderActions';
+import {
+  ORDER_PAY_RESET,
+  ORDER_DELIVER_RESET,
+} from '../constants/orderConstants';
+
+const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
 
   const [sdkReady, setSdkReady] = useState(false);
@@ -22,21 +29,29 @@ const OrderScreen = ({ match }) => {
   const { order, loading, error } = orderDetails;
 
   const orderPay = useSelector((state) => state.orderPay);
-  // we are renaming below
   const { loading: loadingPay, success: successPay } = orderPay;
 
-  // The conditional is to make sure that the loading has completed.
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   if (!loading) {
     //   Calculate prices
     const addDecimals = (num) => (Math.round(num * 100) / 100).toFixed(2);
-    // ORDER SUMMARY ITEMS
+
     order.itemsPrice = addDecimals(
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0),
     );
   }
 
   useEffect(() => {
-    // Dynamically Adding PayPal script
+    // We are checking, if we are logged in.
+    if (!userInfo) {
+      history.push('/login');
+    }
+
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get('/api/config/paypal');
       const script = document.createElement('script');
@@ -49,9 +64,9 @@ const OrderScreen = ({ match }) => {
       document.body.appendChild(script);
     };
 
-    // if we come to the page and order is not there (dispatch), or if the order is successful(dispatch)
-    if (!order || successPay) {
+    if (!order || successPay || successDeliver || order._id !== orderId) {
       dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -60,13 +75,18 @@ const OrderScreen = ({ match }) => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, order, orderId, successPay]);
+  }, [dispatch, orderId, successPay, successDeliver, order]);
 
   const successPaymentHandler = (paymentResult) => {
     console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
   };
 
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order));
+  };
+
+/* eslint-disable */
   return loading ? (
     <Loader />
   ) : error ? (
@@ -82,7 +102,6 @@ const OrderScreen = ({ match }) => {
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>Shipping</h2>
-              {/* user information came from '.populate' */}
               <p>
                 <strong>Name: </strong>
                 {' '}
@@ -90,10 +109,11 @@ const OrderScreen = ({ match }) => {
               </p>
               <p>
                 <strong>Email: </strong>
+                {' '}
                 <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
               </p>
               <p>
-                <strong>Address: </strong>
+                <strong>Address:</strong>
                 {order.shippingAddress.address}
                 ,
                 {order.shippingAddress.city}
@@ -113,6 +133,7 @@ const OrderScreen = ({ match }) => {
                 <Message variant="danger">Not Delivered</Message>
               )}
             </ListGroup.Item>
+
             <ListGroup.Item>
               <h2>Payment Method</h2>
               <p>
@@ -128,6 +149,7 @@ const OrderScreen = ({ match }) => {
                 <Message variant="danger">Not Paid</Message>
               )}
             </ListGroup.Item>
+
             <ListGroup.Item>
               <h2>Order Items</h2>
               {order.orderItems.length === 0 ? (
@@ -222,13 +244,28 @@ const OrderScreen = ({ match }) => {
                   )}
                 </ListGroup.Item>
               )}
+              {loadingDeliver && <Loader />}
+              {userInfo
+                && userInfo.isAdmin
+                && order.isPaid
+                && !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      type="button"
+                      className="btn btn-block"
+                      onClick={deliverHandler}
+                    >
+                      Mark As Delivered
+                    </Button>
+                  </ListGroup.Item>
+              )}
             </ListGroup>
           </Card>
         </Col>
       </Row>
     </>
   );
+  /* eslint-disable */
 };
-/* eslint-disable */
 
 export default OrderScreen;
