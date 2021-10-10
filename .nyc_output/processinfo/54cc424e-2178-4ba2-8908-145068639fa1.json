@@ -1,0 +1,1 @@
+{"parent":null,"pid":65660,"argv":["/usr/local/bin/node","/usr/local/bin/npm","run","test:mocha"],"execArgv":[],"cwd":"/Users/nate/Desktop/ecommerce","time":1633879049832,"ppid":65659,"coverageFilename":"/Users/nate/Desktop/ecommerce/.nyc_output/54cc424e-2178-4ba2-8908-145068639fa1.json","externalId":"","uuid":"54cc424e-2178-4ba2-8908-145068639fa1","files":[]}
