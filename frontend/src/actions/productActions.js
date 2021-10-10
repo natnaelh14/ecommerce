@@ -131,7 +131,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     } = getState();
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
