@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import {
@@ -6,6 +7,7 @@ import {
 } from 'react-bootstrap';
 import { logout } from '../actions/userActions';
 import LogoImage from './img/logo.png';
+import SearchBox from './SearchBox';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -35,6 +37,7 @@ const Header = () => {
           <Navbar.Brand>SpiceLand & Co.</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+            <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className="ms-auto">
               <LinkContainer to="/cart">
                 <Nav.Link>
