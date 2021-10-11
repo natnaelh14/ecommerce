@@ -62,11 +62,9 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_DETAILS_REQUEST,
     });
-    // Destructuring to access the token.
     const {
       userLogin: { userInfo },
     } = getState();
-
     const config = {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
@@ -75,7 +73,6 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     const { data } = await axios.get(`/api/orders/${id}`, config);
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
-      // if it is successful, we will pass the data down to the order state.
       payload: data,
     });
   } catch (error) {
@@ -137,24 +134,25 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_DELIVER_REQUEST,
     });
-    // Destructuring to access the token.
+
     const {
       userLogin: { userInfo },
     } = getState();
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
+
     const { data } = await axios.put(
-      `/api/orders/${order._id}/deliver`, {},
+      `/api/orders/${order._id}/deliver`,
+      {},
       config,
     );
+
     dispatch({
       type: ORDER_DELIVER_SUCCESS,
-      // if it is successful, we will pass the data down to the order state.
       payload: data,
     });
   } catch (error) {

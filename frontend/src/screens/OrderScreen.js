@@ -47,7 +47,6 @@ const OrderScreen = ({ match, history }) => {
   }
 
   useEffect(() => {
-    // We are checking, if we are logged in.
     if (!userInfo) {
       history.push('/login');
     }
@@ -86,7 +85,7 @@ const OrderScreen = ({ match, history }) => {
     dispatch(deliverOrder(order));
   };
 
-/* eslint-disable */
+  /* eslint-disable */
   return loading ? (
     <Loader />
   ) : error ? (
@@ -265,7 +264,7 @@ const OrderScreen = ({ match, history }) => {
       </Row>
     </>
   );
-  /* eslint-disable */
+/* eslint-disable */
 };
 
 export default OrderScreen;
