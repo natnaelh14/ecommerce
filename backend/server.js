@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
 import 'colors';
+import morgan from 'morgan';
 /* eslint-disable */
 import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
@@ -17,6 +18,11 @@ connectDB();
 
 // initialize express with a variable called 'app'
 const app = express();
+
+if (process.env.NODE_ENV === 'development') {
+  // Using Morgan middleware to log http request
+  app.use(morgan('dev'))
+}
 
 app.use(express.urlencoded({ extended: false }));
 // it allows us to accept JSON in the body
