@@ -15,25 +15,35 @@ import {
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
   PRODUCT_UPDATE_FAIL,
+  PRODUCT_CREATE_REVIEW_REQUEST,
+  PRODUCT_CREATE_REVIEW_SUCCESS,
+  PRODUCT_CREATE_REVIEW_FAIL,
 } from '../constants/productConstants';
 import { logout } from './userActions';
 
 // These are action creators, 'PRODUCT_LIST_REQUEST' are action being dispatched back to reducer.
-export const listProducts = () => async (dispatch) => {
+// this keyword is for searching. See HomeScreen
+export const listProducts = (keyword = '') => async (
+  dispatch,
+) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
-    const { data } = await axios.get('/api/products');
+
+    const { data } = await axios.get(
+      `/api/products?keyword=${keyword}`,
+    );
+
     dispatch({
       type: PRODUCT_LIST_SUCCESS,
       payload: data,
     });
-  } catch (e) {
+  } catch (error) {
     dispatch({
       type: PRODUCT_LIST_FAIL,
       payload:
-        e.response && e.response.data.message
-          ? e.response.data.message
-          : e.message,
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
@@ -149,6 +159,39 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     }
     dispatch({
       type: PRODUCT_UPDATE_FAIL,
+      payload: message,
+    });
+  }
+};
+
+// The review object will have the rating and comment.
+export const createProductReview = (productId, review) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PRODUCT_CREATE_REVIEW_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    await axios.post(`/api/products/${productId}/reviews`, review, config);
+    dispatch({
+      type: PRODUCT_CREATE_REVIEW_SUCCESS,
+    });
+  } catch (error) {
+    const message = error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message;
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout());
+    }
+    dispatch({
+      type: PRODUCT_CREATE_REVIEW_FAIL,
       payload: message,
     });
   }

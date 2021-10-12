@@ -1,9 +1,11 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import {
-  Nav, Navbar, Container, NavDropdown,
+  Navbar, Nav, Container, NavDropdown,
 } from 'react-bootstrap';
+import SearchBox from './SearchBox';
 import { logout } from '../actions/userActions';
 import LogoImage from './img/logo.png';
 
@@ -19,12 +21,7 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar
-        style={{ backgroundColor: '#25252c' }}
-        variant="dark"
-        expand="lg"
-        collapseOnSelect
-      >
+      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer
             to="/"
@@ -35,10 +32,12 @@ const Header = () => {
           <Navbar.Brand>SpiceLand & Co.</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+            <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className="ms-auto">
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <i className="fas fa-shopping-cart" />
+                  {' '}
                   Cart
                 </Nav.Link>
               </LinkContainer>
@@ -55,7 +54,8 @@ const Header = () => {
                 <LinkContainer to="/login">
                   <Nav.Link>
                     <i className="fas fa-user" />
-                    Sign in
+                    {' '}
+                    Sign In
                   </Nav.Link>
                 </LinkContainer>
               )}
