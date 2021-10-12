@@ -23,14 +23,14 @@ import { logout } from './userActions';
 
 // These are action creators, 'PRODUCT_LIST_REQUEST' are action being dispatched back to reducer.
 // this keyword is for searching. See HomeScreen
-export const listProducts = (keyword = '') => async (
+export const listProducts = (keyword = '', pageNumber = '') => async (
   dispatch,
 ) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
 
     const { data } = await axios.get(
-      `/api/products?keyword=${keyword}`,
+      `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`,
     );
 
     dispatch({

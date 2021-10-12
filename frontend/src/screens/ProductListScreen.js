@@ -6,14 +6,19 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import Paginate from '../components/Paginate';
 import { listProducts, deleteProduct, createProduct } from '../actions/productActions';
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants';
 
-const ProductListScreen = ({ history, match }) => {
+const ProductListScreen = ({ match, history }) => {
+  const pageNumber = match.params.pageNumber || 1;
+
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const {
+    loading, error, products, page, pages,
+  } = productList;
 
   const productDelete = useSelector((state) => state.productDelete);
   const { loading: loadingDelete, error: errorDelete, success: successDelete } = productDelete;
@@ -36,9 +41,10 @@ const ProductListScreen = ({ history, match }) => {
     if (successCreate) {
       history.push(`/admin/product/${createdProduct._id}/edit`);
     } else {
-      dispatch(listProducts());
+      // "" is the keyword. the listProducts action takes in a keyword and pageNumber
+      dispatch(listProducts('', pageNumber));
     }
-  }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct]);
+  }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct, pageNumber]);
 
   /* eslint-disable */
   const deleteHandler = (id) => {
@@ -111,7 +117,7 @@ const ProductListScreen = ({ history, match }) => {
               ))}
             </tbody>
           </Table>
-          {/* <Paginate pages={pages} page={page} isAdmin={true} /> */}
+          <Paginate pages={pages} page={page} isAdmin={true} />
         </>
       )}
     </>
