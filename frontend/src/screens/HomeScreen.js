@@ -6,7 +6,9 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { listProducts } from '../actions/productActions';
 
-const HomeScreen = () => {
+const HomeScreen = ({ match }) => {
+  const { keyword } = match.params;
+
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
@@ -14,8 +16,9 @@ const HomeScreen = () => {
 
   // Whatever we put in here runs, as soon as the component loads.
   useEffect(() => {
-    dispatch(listProducts());
-  }, [dispatch]);
+    // 'listProducts' is the action that calls the products from the backend.
+    dispatch(listProducts(keyword));
+  }, [dispatch, keyword]);
 
   return (
     <>
