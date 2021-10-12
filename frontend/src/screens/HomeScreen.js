@@ -7,8 +7,9 @@ import Loader from '../components/Loader';
 import { listProducts } from '../actions/productActions';
 
 const HomeScreen = ({ match }) => {
-  const { keyword } = match.params;
-
+  /* eslint-disable */
+  const keyword = match.params.keyword;
+/* eslint-disable */
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
@@ -18,11 +19,12 @@ const HomeScreen = ({ match }) => {
   useEffect(() => {
     // 'listProducts' is the action that calls the products from the backend.
     dispatch(listProducts(keyword));
+    console.log(keyword, 'test')
   }, [dispatch, keyword]);
 
   return (
     <>
-      <h1>Latest Spices</h1>
+      <h1>Latest Products</h1>
       {loading ? (
         <Loader />
       ) : error ? (

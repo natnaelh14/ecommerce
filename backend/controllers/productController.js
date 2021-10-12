@@ -1,4 +1,4 @@
-import asyncHandler from "express-async-handler";
+import asyncHandler from 'express-async-handler';
 /* eslint-disable */
 import Product from "../models/productModel.js";
 /* eslint-disable */
@@ -17,7 +17,6 @@ const getProducts = asyncHandler(async (req, res) => {
         },
       }
     : {};
-
     const products = await Product.find({ ...keyword })
   res.json(products);
 });

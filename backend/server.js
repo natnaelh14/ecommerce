@@ -29,7 +29,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 // '__dirname' points to current directory. But It is only available with commonJS not ES modules.
 // This is the work around.
+
+// Setting the endpoint
+app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/upload', uploadRoutes);
+
+// PayPal client id is stored in a the .env file.
+app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID));
+
 const __dirname = path.resolve()
+
+// We are making the the 'upload' folder static and accessible
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/frontend/build')));
@@ -39,18 +52,6 @@ if (process.env.NODE_ENV === 'production') {
     res.send('API is running....');
   });
 }
-
-// Setting the endpoint
-app.use('/api/products', productRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/orders', orderRoutes);
-app.use('/api/upload', uploadRoutes);
-
-// We are making the the 'upload' folder static and accessible
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
-
-// PayPal client id is stored in a the .env file.
-app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID));
 
 app.use(notFound);
 
