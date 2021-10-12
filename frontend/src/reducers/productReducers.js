@@ -30,7 +30,12 @@ export const productListReducer = (state = { products: [] }, action) => {
       return { loading: true, products: [] };
     // If we get a successful response with the data.
     case PRODUCT_LIST_SUCCESS:
-      return { loading: false, products: action.payload };
+      return {
+        loading: false,
+        products: action.payload.products,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      };
     // If it fails, we will send error through the state.
     case PRODUCT_LIST_FAIL:
       return { loading: false, error: action.payload };
@@ -60,10 +65,7 @@ export const productDetailsReducer = (
   }
 };
 
-export const productDeleteReducer = (
-  state = { product: {} },
-  action,
-) => {
+export const productDeleteReducer = (state = { product: {} }, action) => {
   switch (action.type) {
     case PRODUCT_DELETE_REQUEST:
       return { loading: true };
@@ -76,10 +78,7 @@ export const productDeleteReducer = (
   }
 };
 
-export const productCreateReducer = (
-  state = { product: {} },
-  action,
-) => {
+export const productCreateReducer = (state = { product: {} }, action) => {
   switch (action.type) {
     case PRODUCT_CREATE_REQUEST:
       return { loading: true };
@@ -94,10 +93,7 @@ export const productCreateReducer = (
   }
 };
 
-export const productUpdateReducer = (
-  state = { product: {} },
-  action,
-) => {
+export const productUpdateReducer = (state = { product: {} }, action) => {
   switch (action.type) {
     case PRODUCT_UPDATE_REQUEST:
       return { loading: true };
@@ -112,10 +108,7 @@ export const productUpdateReducer = (
   }
 };
 
-export const productReviewCreateReducer = (
-  state = { },
-  action,
-) => {
+export const productReviewCreateReducer = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_CREATE_REVIEW_REQUEST:
       return { loading: true };
