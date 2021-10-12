@@ -8,7 +8,7 @@ import Product from "../models/productModel.js";
 // @access - Public
 const getProducts = asyncHandler(async (req, res) => {
   // It means how many per page do you want
-  const pageSize = 2
+  const pageSize = 8;
   // Getting page from query
   const page = Number(req.query.pageNumber) || 1
   // Search Keyword
