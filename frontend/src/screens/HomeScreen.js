@@ -9,6 +9,9 @@ import { listProducts } from '../actions/productActions';
 const HomeScreen = ({ match }) => {
   /* eslint-disable */
   const keyword = match.params.keyword;
+
+  const pageNumber = match.params.pageNumber || 1;
+
   /* eslint-disable */
   const dispatch = useDispatch();
 
@@ -18,8 +21,8 @@ const HomeScreen = ({ match }) => {
   // Whatever we put in here runs, as soon as the component loads.
   useEffect(() => {
   // 'listProducts' is the action that calls the products from the backend.
-    dispatch(listProducts(keyword));
-  }, [dispatch, keyword]);
+    dispatch(listProducts(keyword, pageNumber));
+  }, [dispatch, keyword, pageNumber]);
 
   return (
     <>
