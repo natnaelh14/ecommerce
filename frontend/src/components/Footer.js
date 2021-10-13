@@ -3,16 +3,15 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { GrLinkedinOption, GrGithub, GrMail } from 'react-icons/gr';
 
 const Footer = () => (
-  <footer>
+  <footer style={{ marginTop: '50px' }}>
     <Container>
       <Row>
-        <Col className="text-center py-3">
-          Copyright &copy; SpiceLand & Co.
+        <Col className="text-center">
+          Copyright &copy; 2021 SpiceLand & Co. Natnael Haile
         </Col>
       </Row>
-      <Row>
-        <Col>
-          {' '}
+      <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+        <div style={{ margin: '25px' }}>
           <a
             href="https://www.linkedin.com/in/natnael-haile-b146b41bb/"
             target="_blank"
@@ -20,9 +19,8 @@ const Footer = () => (
           >
             <GrLinkedinOption />
           </a>
-        </Col>
-        <Col>
-          {' '}
+        </div>
+        <div style={{ margin: '25px' }}>
           <a
             href="https://github.com/natnaelh14"
             target="_blank"
@@ -30,9 +28,8 @@ const Footer = () => (
           >
             <GrGithub />
           </a>
-        </Col>
-        <Col>
-          {' '}
+        </div>
+        <div style={{ margin: '25px' }}>
           <a
             href="mailto:haile.natnael@natnaeldev.com"
             target="_blank"
@@ -40,8 +37,8 @@ const Footer = () => (
           >
             <GrMail />
           </a>
-        </Col>
-      </Row>
+        </div>
+      </section>
     </Container>
   </footer>
 );
