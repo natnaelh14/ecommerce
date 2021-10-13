@@ -4,11 +4,10 @@
 <img src="https://img.shields.io/github/last-commit/natnaelh14/ecommerce">
 
 ## Live Link
-
+# https://spice-land.herokuapp.com
 ## Description
 
-Ecommerce
-
+An e-coomerce platform built with react/redux, express and MongoDB. 
 ## Table of Contents
 
 - [Installation](#Installation)
@@ -27,7 +26,10 @@ Ecommerce
 
 ## Usage
 
-<!-- ![alt text](./img/screenshot-01.png) -->
+![alt text](./uploads/screenshot-01.png)
+![alt text](./uploads/screenshot-02.png)
+![alt text](./uploads/screenshot-03.png)
+![alt text](./uploads/screenshot-04.png)
 
 ## License
 
