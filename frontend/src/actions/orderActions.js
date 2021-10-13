@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { CART_CLEAR_ITEMS } from '../constants/cartConstants';
 import {
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
@@ -41,6 +42,10 @@ export const createOrder = (order) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_CREATE_SUCCESS,
       // if it is successful, we will pass the data down to the order state.
+      payload: data,
+    });
+    dispatch({
+      type: CART_CLEAR_ITEMS,
       payload: data,
     });
   } catch (error) {
