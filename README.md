@@ -7,7 +7,13 @@
 https://spice-land.herokuapp.com
 ## Description
 
-An e-commerce platform application built with react/redux, express and MongoDB. 
+A full-stack e-commerce application that provides an easy platform to sell and buy spices.
+* Built with React, Redux, Node, Express & MongoDB
+* Full featured shopping cart with PayPal & credit/debit payments
+* Product rating & review system
+* Admin area to manage customers, products & orders
+* Product search, carousel, pagination & more
+
 ## Table of Contents
 
 - [Installation](#Installation)
