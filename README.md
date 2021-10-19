@@ -52,7 +52,7 @@ Copyright (C) 2021 Natnael Haile
 ## Tests
 
     ```
-    N/A
+    npm run test:mocha
     ```
 
 ## Questions
