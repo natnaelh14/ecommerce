@@ -26,9 +26,7 @@ A full-stack e-commerce application that provides an easy platform to sell and b
 
 ## Installation
 
-    ```
     npm install
-    ```
 
 ## Usage
 
@@ -51,9 +49,7 @@ Copyright (C) 2021 Natnael Haile
 
 ## Tests
 
-    ```
     npm run test:mocha
-    ```
 
 ## Questions
 
